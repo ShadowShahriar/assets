@@ -1,0 +1,93 @@
+/** @format */
+/** starter for fresh new projects */
+:root {
+	--signature-light: #f9f4fa;
+	--signature-dark: #112;
+	--fallback-fonts: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, Ubuntu, sans-serif, 'Apple Color Emoji', 'Twemoji Mozilla',
+		'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+*,
+*::before,
+*::after {
+	/** border box sizing for all elements */
+	box-sizing: border-box;
+}
+
+html {
+	cursor: default;
+	min-height: 100%;
+
+	/** default gradient signature for all projects */
+	background-image: radial-gradient(circle at 50%, #fff, var(--signature-light));
+	background-size: 100% 100%;
+	background-attachment: fixed;
+
+	/* TODO remove tap highlight for links and buttons on mobile devices */
+	-webkit-tap-highlight-color: transparent;
+
+	/* TODO fix font-size adjustment in IE */
+	-ms-text-size-adjust: 100%;
+
+	/* TODO fix font-size adjustment in iOS */
+	-webkit-text-size-adjust: 100%;
+
+	display: block;
+
+	font-family: var(--fallback-fonts);
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+html[data-dark] {
+	background-image: radial-gradient(circle at 50%, var(--signature-dark), #000);
+}
+
+body {
+	min-height: 100vh;
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+	color: #000;
+
+	/* TODO fix font inheritance */
+	/* ? extending the idea from this SO 👉 https://stackoverflow.com/q/53846582 */
+	font-family: var(--🤔, var(--preferred-fonts), var(--fallback-fonts));
+}
+
+html,
+body {
+	position: relative;
+	inset: 0;
+	width: 100%;
+}
+
+body[data-center] {
+	display: grid;
+	place-items: center;
+}
+
+html,
+[data-scroll] {
+	overscroll-behavior: contain;
+}
+
+/* ? borrowed from https://haltersweb.github.io/Accessibility/css/base.css */
+.screen-reader-text {
+	/** Hide only visually, but have it available for screenreaders */
+	position: absolute !important;
+	left: 0;
+	top: 0;
+	display: block;
+	visibility: visible;
+	overflow: hidden;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+	white-space: nowrap; /* ! wrap uses line feeds but LFs are not recognized as spaces by screen readers */
+}
+
+/** Made with Coffee, Care, and Curiosity by @ShadowShahriar */
