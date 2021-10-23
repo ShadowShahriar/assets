@@ -1,0 +1,72 @@
+[data-camera] {
+	--scene-size: 500;
+	--scale: 100;
+	--perspective: 700;
+	--cameraZ: 108;
+	--cameraY: 46;
+	--translateX: 0;
+	--translateY: 0;
+	--translateZ: 10;
+}
+
+[data-camera] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	/* background-color: rgba(0, 0, 0, 0); */
+	--fmt-s: calc(var(--scale, 100) / 100);
+	transform: scale(var(--fmt-s));
+	display: grid;
+	place-items: center;
+	overflow: visible;
+
+	transition: transform ease 500ms;
+	will-change: transform;
+}
+
+[data-scene] {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: calc(var(--scene-size) * var(--px));
+	height: calc(var(--scene-size) * var(--px));
+	background-color: rgba(0, 0, 0, 0.1);
+	transform: perspective(calc(var(--perspective, 1000) * 1px))
+		rotateX(calc(var(--cameraY, 0) * 1deg))
+		rotateZ(calc(var(--cameraZ, 0) * 1deg))
+		translate3d(
+			calc(var(--translateX, 0) * var(--px)),
+			calc(var(--translateY, 0) * var(--px) * -1),
+			calc(var(--translateZ, 0) * var(--px) * -1)
+		);
+	--max-rotation: calc((360 + var(--cameraZ)) * 1deg);
+	transform-origin: 50% 50%;
+}
+
+[data-camera][data-dragging] {
+	transition: none;
+}
+
+@keyframes rotateCamera {
+	to {
+		transform: perspective(calc(var(--perspective, 1000) * 1px))
+			rotateX(calc(var(--cameraY, 0) * 1deg)) rotateZ(var(--max-rotation))
+			translate3d(
+				calc(var(--translateX, 0) * var(--px)),
+				calc(var(--translateY, 0) * var(--px) * -1),
+				calc(var(--translateZ, 0) * var(--px) * -1)
+			);
+	}
+}
+
+[data-scene],
+[data-camera],
+[data-3d] {
+	transform-style: preserve-3d;
+}
+
+[data-hidden] {
+	display: none;
+}
