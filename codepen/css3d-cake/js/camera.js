@@ -476,15 +476,3 @@ class Camera {
 		return this
 	}
 }
-
-window.addEventListener('load', () => {
-	new Camera()
-		.setOptimalPerspective()
-		.with({
-			debug: true,
-			rotate: {
-				speed: 1.2
-			}
-		})
-		.init()
-})
