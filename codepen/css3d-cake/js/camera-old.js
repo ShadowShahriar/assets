@@ -43,7 +43,7 @@ class Camera {
 
 			perspective: {
 				speed: 5,
-				range: { perspective: [350, 10e4] },
+				range: { perspective: [350, 2e4] },
 				var: ['--perspective']
 			}
 		}
@@ -448,43 +448,4 @@ class Camera {
 		// this.options = { ...this.options, ...options }
 		return this
 	}
-
-	setOptimalPerspective() {
-		let perspectiveVar = '--perspective'
-		let winWidth = 1366
-		let winHeight = 665
-		let workspaceArea = winWidth * winHeight
-
-		this.#obtainCurrentValues()
-		let workspacePerspective = this.#currentValues[perspectiveVar]
-
-		let currWidth = window.innerWidth
-		let currHeight = window.innerHeight
-		let currentArea = currWidth * currHeight
-
-		let ratio = currentArea / workspaceArea
-		let optimalPerspective = ratio * workspacePerspective
-
-		if (optimalPerspective > workspacePerspective) {
-			this.#rootStyles.setProperty(
-				perspectiveVar,
-				`${optimalPerspective}`
-			)
-			this.options.perspective.speed *= ratio
-		}
-
-		return this
-	}
 }
-
-window.addEventListener('load', () => {
-	new Camera()
-		.setOptimalPerspective()
-		.with({
-			debug: true,
-			rotate: {
-				speed: 1.2
-			}
-		})
-		.init()
-})

@@ -131,7 +131,7 @@
 	right: calc(23 * var(--px));
 	top: calc(13 * var(--px));
 	z-index: 4;
-	font-size: min(16.65px, 2.5vmin);
+	font-size: max(16.65px, 2.5vmin);
 	cursor: pointer;
 	font-weight: 600;
 	text-decoration: none;
