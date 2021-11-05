@@ -1,0 +1,98 @@
+[data-controls] {
+	position: fixed;
+	right: 0;
+	top: 0;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: var(--controls-padding);
+	text-align: right;
+	font-family: 'Montserrat', 'Segoe UI', sans-serif;
+	font-size: var(--controls-font-size);
+	background-color: rgba(0, 0, 0, 0);
+	transition: background-color ease 400ms;
+	border-radius: 0 0 0 2vmin;
+}
+
+input {
+	position: relative;
+	left: 0;
+	top: 0;
+	opacity: 0;
+	margin: 0 -7px;
+}
+
+input:focus-visible + label {
+	outline: 2px solid var(--accent);
+	outline-offset: 4px;
+}
+
+input:checked + label {
+	color: var(--accent);
+}
+
+input:checked + label::before {
+	transform: translateY(var(--controls-line-padding)) scaleX(1);
+	transform-origin: left top;
+}
+
+label {
+	cursor: pointer;
+	position: relative;
+	margin: 0 var(--controls-margin-inline) var(--controls-margin-block) 0;
+	font-weight: 600;
+	color: var(--text-secondary);
+	white-space: nowrap;
+	transition: color ease var(--controls-transition-duration);
+	display: inline-block;
+}
+
+label::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	opacity: var(--controls-line-opacity);
+	transform: translateY(var(--controls-line-padding)) scaleX(0);
+	width: 100%;
+	height: var(--controls-line-height);
+	background-color: currentColor;
+	z-index: -1;
+	transform-origin: right top;
+	transition: transform ease var(--controls-transition-duration);
+	will-change: transform;
+}
+
+label:hover {
+	color: var(--text);
+}
+
+.hint {
+	position: absolute;
+	right: 5vmin;
+	bottom: 0;
+	transform: translate(0%, 100%);
+	min-width: 6.4em;
+	max-width: 20vmin;
+	pointer-events: none;
+	opacity: 0.8;
+	overflow: visible;
+}
+
+.hint-text {
+	color: var(--accent);
+	fill: currentColor;
+}
+
+.special-arrow {
+	stroke: currentColor;
+}
+
+body[data-hinted] .hint {
+	animation: hide ease 0.3s 0.7s forwards;
+}
+
+@keyframes hide {
+	to {
+		opacity: 0;
+	}
+}
